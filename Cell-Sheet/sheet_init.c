@@ -41,7 +41,7 @@ for(int i =0; i<satr; i++){
     //ساخت آدرس برای سلول
     char esm[10]; //یک رشته برای نام ستون
     andisaddadi_be_esm(j,esm);
-    snprintf((*cell).address,sizeof((*cell).address),"%s%d",esm, i+1) //ساخت رشته آدرس سلول که شامل اسم ستون و شماره سطر
+    snprintf((*cell).address,sizeof((*cell).address),"%s%d",esm, i+1); //ساخت رشته آدرس سلول که شامل اسم ستون و شماره سطر
     }
 }
 }
