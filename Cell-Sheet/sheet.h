@@ -15,7 +15,7 @@ typedef struct{
     //آدرس متنی سلول
     double value;
     //مقدار عدد ذخیره شده در سلول
-    char formula[Max_formula_tol];   //چه کردی؟ check later
+    char formula[Max_formula_tol];
     //رشته فرمول
     CellError error;
     //خطاها
@@ -30,18 +30,18 @@ typedef struct{
 
 //توابع مربوط به ستون ها و آدرس ها
 int tabdil_esm_be_andisaddadi(const char* name);
-void andisaddadi_be_esm(int andisaddadi, char*buffer);
-int barrsiaddress_selol(const char*address);
+void andisaddadi_be_esm(int andisaddadi, char* buffer);
+int barrsiaddress_selol(const char* address);
 //مقدار دهی و تغییر سایز
 void initSheet(Sheet* sheet,int satr,int soton);
 //آماده سازی جدول با ابعاد داده شده
-void taghir_size_Sheet(Sheet sheet,int satr_jadid,int soton_jadid);
+void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid);
 //ابعاد جدول رو تغییر میده و سلول جدید مفدار دهی می کند و داده های قبلی حفظ میشوند
 
 //تنظیم و کنترل سلول ها
 Cell* getCell(Sheet* sheet,const char* address);
-int setCellformula(Sheet* sheet,const char* address,const char* formula);
-int setCellvalue(Sheet* sheet,const char* address,double value);
+int setCellFormula(Sheet* sheet,const char* address,const char* formula);
+int setCellValue(Sheet* sheet,const char* address,double value);
 
 //چاپ
 void printSheet(const Sheet* sheet);
@@ -51,7 +51,7 @@ void printSheet_mahdod(const Sheet* sheet,int maxsatrs,int maxsotons);
 
 //ذخیره و بارگذاری
 int saveSheetCSV(const Sheet* sheet,const char* filename);
-int loadSheetCSV(Sheet sheet,const char* filename);
+int loadSheetCSV(Sheet* sheet,const char* filename);
 
 //خطاها
 void setCellError(Cell* cell,CellError err);
@@ -63,5 +63,5 @@ const char* errorToString(CellError err);
 
 //صحت سنجی ورودی ها
 int isvalidnumber(const char*s);
-int sanitize formula(const char*formula);
+int sanitize_Formula(const char* formula);
 #endif
