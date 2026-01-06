@@ -4,10 +4,12 @@
 #define Max_satr 100
 #define Max_soton 100
 #define Max_formula_tol 256
+
 typedef enum{
     //نوع خطاها
     Err_NONE,Err_taghsim_sefr,Err_tabe_nashenakhte_formul,Err_erjaa_namotabar_beselol,Err_parantez,Err_damane_tabe,Err_file,Err_ghaleb_dade
 }CellError;
+
 typedef struct{
     char address[10];
     //آدرس متنی سلول
@@ -18,12 +20,14 @@ typedef struct{
     CellError error;
     //خطاها
 }Cell;
+
 typedef struct{
     int satr;
     int soton;
     Cell cells[Max_satr][Max_soton];
     //ماتریس دو بعدی برای سلول
 }Sheet;
+
 //توابع مربوط به ستون ها و آدرس ها
 int tabdil_esm_be_andisaddadi(const char* name);
 void andisaddadi_be_esm(int andisaddadi, char* buffer);
