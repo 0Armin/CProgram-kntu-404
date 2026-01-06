@@ -6,7 +6,7 @@
 #define Max_formula_tol 256
 typedef enum{
     //نوع خطاها
-    Err_NONE,Err_taghsim_sefr,Err_tabe_nashenakhte_formul,Err_erjaa_namotabar_beselol,Err_parantez,Err_damane_tabe,Err_fayl,Err_ghaleb_dade
+    Err_NONE,Err_taghsim_sefr,Err_tabe_nashenakhte_formul,Err_erjaa_namotabar_beselol,Err_parantez,Err_damane_tabe,Err_file,Err_ghaleb_dade
 }CellError;
 typedef struct{
     char address[10];
