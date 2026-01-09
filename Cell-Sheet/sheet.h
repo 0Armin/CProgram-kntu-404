@@ -46,7 +46,7 @@ int setCellValue(Sheet* sheet,const char* address,double value);
 //چاپ
 void printSheet(const Sheet* sheet);
 // چاپ کامل هر سلول با آدرس و مقدار و فرمول و وضعیت خطا
-void printSheet_mahdod(const Sheet* sheet,int maxsatrs,int maxsotons);
+void printSheet_mahdod(const Sheet* sheet,int maxsatr,int maxsoton);
 //چاپ مقادیر با محدودیت داده شده
 
 //ذخیره و بارگذاری
