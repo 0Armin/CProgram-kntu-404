@@ -1,8 +1,8 @@
 #ifndef Sheet_h
 #define Sheet_h
 #include <stddef.h>
-#define Max_satr 100
-#define Max_soton 100
+#define Max_satr 1000
+#define Max_soton 1000
 #define Max_formula_tol 256
 
 typedef enum{

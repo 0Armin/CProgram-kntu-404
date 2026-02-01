@@ -122,7 +122,7 @@ int setCellFormula(Sheet* sheet, const char* address, const char* formula) {
     /*
 یک مثالش مثلا آدرس برابر آ1 و فرمول برابر بی1+سی1 باشد ابن تابع فرمول بی1+سی1 رو در آ1 ذخیره میکنه
     */
-         strncpy(cell->formula, formula, MAX_FORMULA_LEN);
+         strncpy(cell->formula, formula, Max_formula_tol);
     cell->formula[Max_formula_tol - 1] = '\0';
     return 1;
 }
