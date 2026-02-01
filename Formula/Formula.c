@@ -5,15 +5,15 @@
 #include "split_input.h"
 #include "calculate.h"
 
-void free_list(part_list list);
+void free_list(part_list list);//بعد از انجام محاسبه حافظه را آزاد میکند
 
 double formula(char *input){
 
-    part_list list = split(input);
+    part_list list = split(input);//تبدیل استرینگ به چیزی که میتوان با ان کار کرد
 
-    double result = calculate(&list);
+    double result = calculate(&list);//محاسبه
 
-    free_list(list);
+    free_list(list);//ازادسازی حافظه
 
-    return result;
+    return result;//برگرداندن مقدار محاسبه شده
 }
