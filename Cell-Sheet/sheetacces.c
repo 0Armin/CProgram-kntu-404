@@ -79,7 +79,7 @@ int barrsiaddress_selol(const char* address){
     col[len] = '\0';
     int colIndex = tabdil_esm_be_andisaddadi(col);
     int satr = atoi(address + startDigits) - 1;
-    return (colIndex >= 0 && colIndex < MAX_soton && satr >= 0 && satr < Max_satr);
+    return (colIndex >= 0 && colIndex < Max_soton && satr >= 0 && satr < Max_satr);
 }
 
 Cell* getCell(Sheet* sheet, const char* address) {
