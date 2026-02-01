@@ -25,7 +25,7 @@ if( maxsatr > (*sheet).satr){
     maxsatr = (*sheet).satr;
 }
 if( maxsoton > (*sheet).soton){
-    maxsoton = (*sheet).soton
+    maxsoton = (*sheet).soton;
 }
 //در حلقه پایین روی سطر و ستون ها حرکت میکنه
 for(int i=0; i<maxsatr; i++){
