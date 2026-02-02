@@ -49,10 +49,6 @@ void printSheet(const Sheet* sheet);
 void printSheet_mahdod(const Sheet* sheet,int maxsatr,int maxsoton);
 //چاپ مقادیر با محدودیت داده شده
 
-//ذخیره و بارگذاری
-int saveSheetCSV(const Sheet* sheet,const char* filename);
-int loadSheetCSV(Sheet* sheet,const char* filename);
-
 //خطاها
 void setCellError(Cell* cell,CellError err);
 //تنظیم وضعیت خطا برای یک سلول
