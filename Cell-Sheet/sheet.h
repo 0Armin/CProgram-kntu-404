@@ -1,5 +1,5 @@
-#ifndef Sheet_h
-#define Sheet_h
+#ifndef SHEET_H
+#define SHEET_H
 #include <stddef.h>
 #define Max_satr 1000
 #define Max_soton 1000
