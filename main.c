@@ -1,13 +1,23 @@
 #include "sheet.h"
+#include "formula.h"
+#include "split_input.h"
 #include <stdio.h>
+#include <string.h>
+
+void menu();
+
 int main() {
+    printf("Program started!\n");
+    getchar();
     Sheet sheet;
     int init = 0;
+    menu();
+
     while (1) {
         menu();
         int choice;
         scanf("%d", &choice);
-        if (choice == 1) {
+        if (choice == 1){
             int satr, soton;
             printf("تعداد سطر: ");
             scanf("%d", &satr);
@@ -17,6 +27,7 @@ int main() {
             init = 1;  //نقش یک پرچم رو بازی میکنه که متوجه بشیم آیا جدول مقدار دهی انجام شده یا خیر که عدد 1 یعنی حدول آماده استفاده کردن شده است
             printf("جدول مقداردهی شد.\n");
         }
+
         else if (choice == 2) {
             if (!init) {
                 //بررسی اینکه جدول خالی نباشه و اول جدول ساخته شود
@@ -24,16 +35,29 @@ int main() {
                 continue;
             }
             char address[10];
+            char input[256];
+            int ch;
             double value;
+
             printf("آدرس سلول (مثلاً A1): ");
             scanf("%s", address);
-            printf("مقدار عددی: ");
-            scanf("%lf", &value);
+
+            printf("ورودی: ");
+            while ((ch = getchar()) != '\n' && ch != EOF);
+            if (fgets(input, sizeof(input), stdin) == NULL)
+            {
+            printf("Input error\n");
+            break;
+            }
+            input[strcspn(input, "\n")] = '\0';
+            value = formula(input, sheet);
+
             if (setCellValue(&sheet, address, value))
                 printf("مقدار تنظیم شد.\n");
             else
                 printf("خطا: آدرس نامعتبر\n");
         }
+
         else if (choice == 3) {
             if (!init) {
                 printf("اول جدول را مقداردهی اولیه کنید\n");
