@@ -31,6 +31,7 @@ static void add_part(part_list *list, part p){
     list->current++;
 }
 // این قسمت مسئول اختصاص دادن حافظه به هر قسمت از لیست ماست
+
 part_list split(char *text){
     part_list list;// یک لیست درست میکنیم
     meghdardehi(&list);//مقدار دهی اولیه انجام میدیم
@@ -75,10 +76,17 @@ part_list split(char *text){
         {
             int start = i;
             int length;//طول کلمه
+            int hasdigit = 0; //برای تشخیص وجود اسم سلول که دارای عدد است
             while (isalpha(text[i]))
             {
                 i++;
             }
+            while (isdigit(text[i])) //
+            {
+                i++;
+                hasdigit = 1;
+            }
+            
             length = i-start;
             char *name = malloc(length + 1);
             strncpy(name, &text[start], length);
@@ -86,7 +94,13 @@ part_list split(char *text){
             name[length]= '\0';
 
             part p;
-            p.noe = function;
+            if (hasdigit)
+            {
+                p.noe = cell_ref;
+                //p.value = 
+            }else{
+                p.noe = function;
+            }
             p.number = 0;
             p.text_name = name;
 
@@ -125,13 +139,16 @@ part_list split(char *text){
         if (text[i] == ')')//پرانتز بسته
         {
             part p;
-            p.noe = s_parantes;
+            p.noe = e_parantes;
             p.number = 0;
             p.text_name = NULL;
             add_part(&list, p);
             i++;
             continue;
         }
+
+        printf("Invalid character %c ",text[i]); //اگر هیچ کدام از کاراکتر های بالا نبود اررور میده
+        i++;
     }
 
     return list;

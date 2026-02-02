@@ -15,5 +15,7 @@ double formula(char *input){
 
     free_list(list);//ازادسازی حافظه
 
+
+    
     return result;//برگرداندن مقدار محاسبه شده
 }
