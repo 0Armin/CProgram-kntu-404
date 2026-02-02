@@ -1,7 +1,7 @@
 #include "sheet.h"
 #include <ctype.h>
 #include <string.h>
-int isvalidNumber(const char* s) {
+int isvalidnumber(const char* s) {
 //چک کردن اینکه فرمول از نظر منطقی و گرامری درست باشه مثلا پرانتز ها درست باز و بسته شدن یا عملگرها به درستی استفاده شدن
     //هدف این تابع بررسی اینکه یک رشته عدد معتبر هست یا نه
     if (!s || !*s) {
