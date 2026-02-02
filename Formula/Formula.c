@@ -3,7 +3,6 @@
 #include <ctype.h>
 #include <string.h>
 #include "split_input.h"
-//#include "calculate.h"
 
 void free_list(part_list list);//بعد از انجام محاسبه حافظه را آزاد میکند
 
