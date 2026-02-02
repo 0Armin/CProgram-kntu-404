@@ -61,7 +61,7 @@ part_list split(char *text){
             p.text_name = NULL;
 
             add_part(&list, p);
-            i = end - start;
+            i = end - text;
             // در اینجا ادرس انتها را از ادرس ابتدای تکست کم میکند که خونه ای که روش قرار داریم رو برمیگردونه
             //برای مثال اگر عدد ما 
             //text = "34.68"
