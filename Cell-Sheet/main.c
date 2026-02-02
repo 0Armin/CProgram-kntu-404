@@ -32,7 +32,7 @@ int main() {
             if (setCellValue(&sheet, address, value))
                 printf("مقدار تنظیم شد.\n");
             else
-                printf("خطا: آدرس نامعتبر.\n");
+                printf("خطا: آدرس نامعتبر\n");
         }
         else if (choice == 3) {
             if (!init) {
