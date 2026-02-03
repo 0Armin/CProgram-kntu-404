@@ -42,26 +42,12 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
                 Cell* cell = &(*sheet).cells[i][j];
                 if((*cell).value != 0.0 || (*cell).formula[0] != '\0'){
                     printf("Hoshdar: selol %s daraye dade bode va hazf shod\n", (*cell).address);
-        }
-    }
-    free((*sheet).cells[i]); //آزاد کردن حافظه سطر
+                }
+            }
+        free((*sheet).cells[i]); //آزاد کردن حافظه سطر
   }
 }
 
-<<<<<<< HEAD
-    // حالا مقداردهی ستون های جدید در سطرهای قدیمی
-    //در واقع این بخش ستون های جدید رو در سطر های قبلی مقداردهی میکنه
-      for(int i=0; i< satr_ghadimi; i++){
-        for(int j= soton_ghadimi; j< soton_jadid; j++){
-            Cell* cell = &(*sheet).cells[i][j];
-            (*cell).value = 0.0;
-            (*cell).formula[0]= '\0';
-            (*cell).error = Err_NONE;
-           char esm[10]; //یک رشته برای نام ستون
-         andisaddadi_be_esm(j,esm);
-         snprintf((*cell).address,sizeof((*cell).address),"%.10s%d",esm, i+1); //ساخت رشته آدرس سلول که شامل اسم ستون و شماره سطر
-       // این کد آدرس کامل سلول رو درست می کنه و داخل address ذخیره میکنه
-=======
 
 //تغییر اندازه آرایه سطرها
     Cell** sotoonha_jadid = realloc((*sheet).cells , satr_jadid * sizeof(Cell*));
@@ -119,7 +105,6 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
                 andisaddadi_be_esm(j, esm);
                 snprintf((*cell).address, sizeof((*cell).address), "%s%d", esm, i+1);
             }
->>>>>>> 994aaa1539ea17cc7a07ebc641875c686ac01b23
         }
     }
 //با ترکیب کلی اینا جدول بزرگتر میشه

@@ -38,12 +38,8 @@ int main() {
                 printf("Meghdar dehi avaliye anjam shavad\n");
                 continue;
             }
-<<<<<<< HEAD
-            char address[20];
-=======
 
             char address[10];
->>>>>>> 994aaa1539ea17cc7a07ebc641875c686ac01b23
             char input[256];
             int ch;
             double value;
@@ -61,20 +57,8 @@ int main() {
             }
 
             input[strcspn(input, "\n")] = '\0';
-<<<<<<< HEAD
-            if (input[0] == '=')
-            {
-                value = formula(input, &sheet);
-            }
-            else
-            {
-                value = atof(input);
-            }
-
-=======
 
             value = formula(input, &sheet);
->>>>>>> 994aaa1539ea17cc7a07ebc641875c686ac01b23
 
             if (setCellValue(&sheet, address, value))
                 printf("Meghdar tanzim shod\n");
@@ -88,12 +72,8 @@ int main() {
                 printf("Meghdar dehi avaliye anjam shavad\n");
                 continue;
             }
-<<<<<<< HEAD
-            char address[20];
-=======
 
             char address[10];
->>>>>>> 994aaa1539ea17cc7a07ebc641875c686ac01b23
             char formula[Max_formula_tol];
             int ch;
 
