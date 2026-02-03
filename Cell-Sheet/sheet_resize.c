@@ -33,9 +33,15 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
     // اگر تعداد سطرها کم شده سطرهای اضافه آزاد شوند
     if(satr_jadid < satr_ghadimi){
         for(int i = satr_jadid; i < satr_ghadimi; i++){
-            free((*sheet).cells[i]);
+            for(int j=0; j< soton_ghadimi; j++){
+                Cell* cell = &(*sheet).cells[i][j];
+                if((*cell).value != 0.0 || (*cell).formula[0] != '\0'){
+                    printf("Hoshdar: selol %s daraye dade bode va hazf shod\n", (*cell).address);
         }
     }
+    free((*sheet).cells[i]);
+  }
+}
 
     Cell** sotoonha_jadid = realloc((*sheet).cells , satr_jadid * sizeof(Cell*));
        if(!sotoonha_jadid){
@@ -59,6 +65,14 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
             }
         }
         else {
+            if(soton_jadid < soton_ghadimi){
+                for(int j = soton_jadid; j< soton_ghadimi; j++){
+                    Cell* cell = &(*sheet).cells[i][j];
+                    if((*cell).value != 0.0 || (*cell).formula[0] != '\0'){
+                        printf("Hoshdar: selol %s daraye dade bod va hazf shod\n", (*cell).address);
+                    }
+                }
+            }
             // سطر قدیمی  فقط ستون‌ها را تغییر می‌دهیم
             Cell* sotonha_jadid = realloc((*sheet).cells[i], soton_jadid * sizeof(Cell));
             if(!sotonha_jadid){
