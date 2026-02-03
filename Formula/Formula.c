@@ -51,7 +51,35 @@ double formula(char *input, Sheet *sheet)
     // محاسبه://
    
     double result = parse_and_calculate(list, (void*)sheet, &err);
-
+    switch (err)
+    {
+    case ERR_DIV_ZERO:
+        printf("error taghsim bar sefr");
+        break;
+    case ERR_UNKNOWN_FUNCTION:
+        printf("error function namoshakhaser");
+        break;
+    case ERR_INVALID_CELL:
+        printf("error selol namotabar");
+        break;
+    case ERR_EMPTY_CELL:
+        printf("error selol khali");
+        break;
+    case ERR_PAREN_MISMATCH:
+        printf("error parantes");
+        break;
+    case ERR_DOMAIN:
+        printf("error damane");
+        break;
+    case ERR_SYNTAX:
+        printf("error syntax");
+        break;
+    case ERR_EMPTY_INPUT:
+        printf("error vorody khali");
+        break;
+    default:
+        break;
+    }
     /* بعد از محاسبه، حتماً حافظه لیست را آزاد کن */
     free_list(list);
 
