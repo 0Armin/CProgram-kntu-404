@@ -32,7 +32,7 @@ if( maxsoton > (*sheet).soton){
 for(int i=0; i<maxsatr; i++){
     for(int j=0; j<maxsoton; j++){
         const Cell* cell = &(*sheet).cells[i][j];
-        printf("%.4f\t", (*cell).value);
+        printf("%s: %.4f\t",(*cell).address, (*cell).value);
     }
     printf("\n");
 }
