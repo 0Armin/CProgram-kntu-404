@@ -6,14 +6,12 @@ CFLAGS = -Wall -g -MMD -MP
 LDFLAGS = -lm
 
 # =========================
-# Directories
+# Directories (بدون تست)
 # =========================
-SRC_DIRS := . Cell-Sheet File Formula
+SRC_DIRS := . Cell-Sheet Formula File
 
-# =========================
-# Source files and object files
-# =========================
-SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+# همه فایل‌ها به جز test_file.c
+SRCS := $(filter-out File/test_file.c, $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)))
 OBJS := $(SRCS:.c=.o)
 DEPS := $(OBJS:.o=.d)
 
@@ -23,7 +21,7 @@ DEPS := $(OBJS:.o=.d)
 TARGET = Exel_Program
 
 # =========================
-# Build rules
+# Build main program
 # =========================
 all: $(TARGET)
 
@@ -32,16 +30,23 @@ $(TARGET): $(OBJS)
 
 # Compile .c -> .o
 %.o: %.c
-	@echo "Compiling $<..."
+	@echo Compiling $<...
 	$(CC) $(CFLAGS) -I. -ICell-Sheet -IFile -IFormula -c $< -o $@
 
 # Include dependencies
 -include $(DEPS)
 
-# Clean build
+# =========================
+# File module tests
+# =========================
+test: CFLAGS += -DRUN_FILE_TESTS
+test: File/test_file.o File/utils.o File/format_check.o File/loader.o File/saver.o
+	$(CC) $(CFLAGS) -o file_tests $^ $(LDFLAGS)
+
+# =========================
+# Clean build (Linux + Windows)
+# =========================
 clean:
 	@echo Cleaning object and dependency files...
-	-del /f $(OBJS) 2>nul
-	-del /f $(DEPS) 2>nul
-	-if exist $(TARGET).exe del /f $(TARGET).exe
-	-if exist $(TARGET) del /f $(TARGET)
+	rm -f $(OBJS) $(DEPS) $(TARGET) file_tests 2>/dev/null || true
+	del /f $(OBJS) $(DEPS) $(TARGET).exe file_tests.exe 2>nul || true

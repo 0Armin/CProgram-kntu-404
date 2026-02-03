@@ -3,7 +3,7 @@
 #define FORMULA_H
 
 #include "split_input.h"
-#include"sheet.h"
+#include "../Cell-Sheet/sheet.h"
 
 // کدهای خطا //
 #define ERR_NONE 20//بدون ارور//

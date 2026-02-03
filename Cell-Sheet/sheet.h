@@ -4,14 +4,23 @@
 #define Max_satr 10
 #define Max_soton 10
 #define Max_formula_tol 256
+#define MAX_FORMULA 256
+
+extern int sheet_type;
 
 typedef enum{
     //نوع خطاها
     Err_NONE,Err_taghsim_sefr,Err_tabe_nashenakhte_formul,Err_erjaa_namotabar_beselol,Err_parantez,Err_damane_tabe,Err_file,Err_ghaleb_dade
 }CellError;
+typedef enum {
+    CELL_EMPTY = 0,
+    CELL_NUMBER = 1,
+    CELL_FORMULA = 2,
+    CELL_TEXT = 3
+} CellType;
 
 typedef struct{
-    char address[10];
+    char address[20];
     //آدرس متنی سلول
     double value;
     //مقدار عدد ذخیره شده در سلول
@@ -19,6 +28,8 @@ typedef struct{
     //رشته فرمول
     CellError error;
     //خطاها
+    CellType type;
+
 }Cell;
 
 typedef struct{
@@ -40,6 +51,8 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid);
 
 //تنظیم و کنترل سلول ها
 Cell* getCell(Sheet* sheet,const char* address);
+Cell* getCellByIndex(Sheet* sheet, int row, int col);
+
 int setCellFormula(Sheet* sheet,const char* address,const char* formula);
 int setCellValue(Sheet* sheet,const char* address,double value);
 

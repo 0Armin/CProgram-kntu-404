@@ -50,7 +50,7 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
             (*cell).error = Err_NONE;
            char esm[10]; //یک رشته برای نام ستون
          andisaddadi_be_esm(j,esm);
-         snprintf((*cell).address,sizeof((*cell).address),"%s%d",esm, i+1); //ساخت رشته آدرس سلول که شامل اسم ستون و شماره سطر
+         snprintf((*cell).address,sizeof((*cell).address),"%.10s%d",esm, i+1); //ساخت رشته آدرس سلول که شامل اسم ستون و شماره سطر
        // این کد آدرس کامل سلول رو درست می کنه و داخل address ذخیره میکنه
         }
     }

@@ -1,8 +1,10 @@
-#include "sheet.h"
+#include "Cell-Sheet/sheet.h"
 #include "formula.h"
 #include "split_input.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 
 void menu();
 
@@ -34,7 +36,7 @@ int main() {
                 printf("اول جدول را مقداردهی اولیه کنید.\n");
                 continue;
             }
-            char address[10];
+            char address[20];
             char input[256];
             int ch;
             double value;
@@ -50,7 +52,15 @@ int main() {
             break;
             }
             input[strcspn(input, "\n")] = '\0';
-            value = formula(input, &sheet);
+            if (input[0] == '=')
+            {
+                value = formula(input, &sheet);
+            }
+            else
+            {
+                value = atof(input);
+            }
+
 
             if (setCellValue(&sheet, address, value))
                 printf("done\n");
@@ -63,7 +73,7 @@ int main() {
                 printf("اول جدول را مقداردهی اولیه کنید\n");
                 continue;
             }
-            char address[10];
+            char address[20];
             char formula[Max_formula_tol];
             printf("آدرس سلول: ");
             scanf("%s", address);

@@ -140,8 +140,14 @@ int setCellValue(Sheet* sheet, const char* address, double value) {
     مثلا اگر ادرس آ1 رو بدی بعد ولیو ش رو 10 بدی  این تابع مقدار 10 رو در آ1 ذخیره میکنه
     */
     cell->value = value;
-    return 1;
+    return 1;}
+    Cell* getCellByIndex(Sheet* sheet, int row, int col) {
+    if (!sheet) return NULL;
+    if (row < 0 || row >= sheet->satr) return NULL;
+    if (col < 0 || col >= sheet->soton) return NULL;
+    return &sheet->cells[row][col];
 }
+
 /*
 1. buffer (متغیر):
 
