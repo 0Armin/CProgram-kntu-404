@@ -19,14 +19,17 @@
 index   0     1     2     3     4
         [3]   [+]   [5]   [*]   [2]     */
 static int pos_token;
-
+/*
+بدلیل اینکه این توابع و اسم فقط مخصوص این فایل است .
+به صورت استاتیک نوشته شده تا با ارور لینک و اسم مشابه مواجه نشویم و درست کار کند .
+*/
 /* اعلام توابع داخلی 
 اعلان تابع نیاز نیست اگر به ترتیب باشه اما چون نمی‌دانیم اعلام تابع انجام می دهیم .
 */
 static double parse_expression(part_list list, void *sheet, int *err);
 static double parse_term(part_list list, void *sheet, int *err);
 static double parse_factor(part_list list, void *sheet, int *err);
-
+static double parse_power(part_list list, void *sheet, int *err);
 // parse_factor: عدد، پرانتز، تابع یا ارجاع سلولی //
 static double parse_factor(part_list list, void *sheet, int *err)
 {
@@ -158,10 +161,12 @@ static double parse_power(part_list list, void *sheet, int *err)
     return left;
 }
 
+
 // ضرب و تقسیم //
 static double parse_term(part_list list, void *sheet, int *err)
 {
-    double left = parse_factor(list, sheet, err);
+    //parse_power  اینجا تابع توان استفاده می‌کنیم تا عملگر ^ قبلا تر پردازش شود //
+    double left = parse_power(list, sheet, err);
     if (*err != ERR_NONE) return 0;
 
     while (pos_token < list.current) {
@@ -169,7 +174,7 @@ static double parse_term(part_list list, void *sheet, int *err)
         if (p.noe == operator && (strcmp(p.text_name, "*") == 0 || strcmp(p.text_name, "/") == 0)) {
             char op = p.text_name[0];
             pos_token++;
-            double right = parse_factor(list, sheet, err);
+            double right = parse_power(list, sheet, err); /* توجه: parse_power */
             if (*err != ERR_NONE) return 0;
             if (op == '*') left *= right;
             else {
@@ -180,6 +185,8 @@ static double parse_term(part_list list, void *sheet, int *err)
     }
     return left;
 }
+
+
 
 // جمع و تفریق //
 static double parse_expression(part_list list, void *sheet, int *err)

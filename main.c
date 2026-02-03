@@ -18,7 +18,13 @@ int main() {
 
         menu();
         int choice;
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1){
+         int ch;
+        while ((ch = getchar()) != '\n' && ch != EOF);
+        printf("Gozine namotabar\n");
+        continue;
+        }
+
 
         if (choice == 1){
             int satr, soton;

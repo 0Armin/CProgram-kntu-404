@@ -51,31 +51,32 @@ double formula(char *input, Sheet *sheet)
     // محاسبه://
    
     double result = parse_and_calculate(list, (void*)sheet, &err);
+
     switch (err)
     {
     case ERR_DIV_ZERO:
-        printf("error taghsim bar sefr");
+        printf("error taghsim bar sefr\n");
         break;
     case ERR_UNKNOWN_FUNCTION:
-        printf("error function namoshakhaser");
+        printf("error function namoshakhaser\n");
         break;
     case ERR_INVALID_CELL:
-        printf("error selol namotabar");
+        printf("error selol namotabar\n");
         break;
     case ERR_EMPTY_CELL:
-        printf("error selol khali");
+        printf("error selol khali\n");
         break;
     case ERR_PAREN_MISMATCH:
-        printf("error parantes");
+        printf("error parantes\n");
         break;
     case ERR_DOMAIN:
-        printf("error damane");
+        printf("error damane\n");
         break;
     case ERR_SYNTAX:
-        printf("error syntax");
+        printf("error syntax\n");
         break;
     case ERR_EMPTY_INPUT:
-        printf("error vorody khali");
+        printf("error vorody khali\n");
         break;
     default:
         break;
@@ -83,6 +84,8 @@ double formula(char *input, Sheet *sheet)
     /* بعد از محاسبه، حتماً حافظه لیست را آزاد کن */
     free_list(list);
 
-    /* اگر خواستی می‌توانی بر اساس err پیام چاپ کنی؛ اما خودِ فراخواننده هم می‌تواند این کار را بکند */
+    /* اگر خواستی می‌توانی بر اساس 
+    err
+    پیام چاپ کنی؛ اما خود فراخواننده هم می‌تواند این کار را بکند */
     return result;
 }
