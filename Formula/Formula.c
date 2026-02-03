@@ -9,7 +9,7 @@
 
 //void free_list(part_list list);//بعد از انجام محاسبه حافظه را آزاد میکند
 
-double formula(char *input, Sheet sheet){
+double formula(char *input, Sheet *sheet){
     int err = ERR_NONE;
     part_list list = split(input);//تبدیل استرینگ به چیزی که میتوان با ان کار کرد
 

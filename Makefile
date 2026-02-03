@@ -40,6 +40,8 @@ $(TARGET): $(OBJS)
 
 # Clean build
 clean:
-	@echo "Cleaning..."
-	-for %f in ($(OBJS) $(DEPS)) do if exist "%f" del /f "%f"
-	if exist $(TARGET) del /f $(TARGET)
+	@echo Cleaning object and dependency files...
+	-del /f $(OBJS) 2>nul
+	-del /f $(DEPS) 2>nul
+	-if exist $(TARGET).exe del /f $(TARGET).exe
+	-if exist $(TARGET) del /f $(TARGET)

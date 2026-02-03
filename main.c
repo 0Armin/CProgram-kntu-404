@@ -8,7 +8,7 @@ void menu();
 
 int main() {
     printf("Program started!\n");
-    getchar();
+    
     Sheet sheet;
     int init = 0;
     menu();
@@ -39,10 +39,10 @@ int main() {
             int ch;
             double value;
 
-            printf("آدرس سلول (مثلاً A1): ");
+            printf("cell address like A1");
             scanf("%s", address);
 
-            printf("ورودی: ");
+            printf("input: ");
             while ((ch = getchar()) != '\n' && ch != EOF);
             if (fgets(input, sizeof(input), stdin) == NULL)
             {
@@ -50,12 +50,12 @@ int main() {
             break;
             }
             input[strcspn(input, "\n")] = '\0';
-            value = formula(input, sheet);
+            value = formula(input, &sheet);
 
             if (setCellValue(&sheet, address, value))
-                printf("مقدار تنظیم شد.\n");
+                printf("done\n");
             else
-                printf("خطا: آدرس نامعتبر\n");
+                printf("error address wrong\n");
         }
 
         else if (choice == 3) {
@@ -121,13 +121,13 @@ int main() {
     return 0;
 }
 void menu() {
-    printf("\n===== منوی اصلی =====\n");
-    printf("1) مقداردهی اولیه جدول\n");
-    printf("2) تنظیم مقدار یک سلول\n");
-    printf("3) تنظیم فرمول یک سلول\n");
-    printf("4) چاپ کامل جدول\n");
-    printf("5) چاپ محدود جدول\n");
-    printf("6) تغییر اندازه جدول\n");
-    printf("7) خروج\n");
-    printf("گزینه را وارد کنید: ");
+    printf("\n===== main menu =====\n");
+    printf("1) initilize\n");
+    printf("2) set cell\n");
+    printf("3) set formula for cell\n");
+    printf("4) print full cell\n");
+    printf("5) print specific\n");
+    printf("6) change size of table\n");
+    printf("7) exit\n");
+    printf("enter your choice: ");
 }

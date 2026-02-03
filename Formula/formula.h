@@ -15,7 +15,7 @@
 #define ERR_DOMAIN 26// خطای دامنه تابع (مثلاً ریشه عدد منفی یا لگاریتم عدد نامعتبر)//
 #define ERR_SYNTAX 27// خطای نحوی در عبارت ورودی//
 
-double formula(char *input, Sheet sheet);
+double formula(char *input, Sheet *sheet);
 //ارور هندلینگ در بخش اجرای توابع ریاضی انجام شده و تمام پاسخ به فارسی دارند و ارور نمیده//
 const char* error_message_fa(int errcode);
 
