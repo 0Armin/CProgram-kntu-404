@@ -36,6 +36,7 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
     
     // اگر تعداد سطرها کم شده سطرهای اضافه آزاد شوند
     if(satr_jadid < satr_ghadimi){
+        //اگر تعداد سطر جدید کمتر از قبلی باشد باید سطرهای اضافه حذف شوند
         for(int i = satr_jadid; i < satr_ghadimi; i++){
             //قبل از آزاد کردن بررسی میکنه که آیا سلول داده داره یا نه
             for(int j=0; j< soton_ghadimi; j++){
@@ -51,11 +52,11 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
 
 //تغییر اندازه آرایه سطرها
 //آرایه اشاره گرهای سطرها با اندازه جدید تغییر داده میشه
-    Cell** satrha_jadid = realloc((*sheet).cells , satr_jadid * sizeof(Cell*));
+    Cell** satrha_jadid = realloc((*sheet).cells , satr_jadid * sizeof(Cell*));  //این خط آرایه اشاره گرهای سطرها را بزرگ تر یا کوچک تر میکنه
        if(!satrha_jadid){
         return; //اگر حافظه کافی نبود
     }
-    (*sheet).cells = satrha_jadid;
+    (*sheet).cells = satrha_jadid;  //در نهایت آرایه جدید جایگزین آرایه قبلی می شه
 
     //حرکت روی سطرهای جدید و قدیمی
     for(int i = 0; i < satr_jadid; i++){
