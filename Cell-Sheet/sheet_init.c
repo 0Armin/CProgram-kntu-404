@@ -1,6 +1,7 @@
 #include "sheet.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 //تعریف تابعی که مفدار دهی اولیه می کند
 //ورودی هاش اشاره گر به جدول اصلی و سطرها و ستون ها
 void initSheet(Sheet* sheet,int satr,int soton){
@@ -30,6 +31,21 @@ void initSheet(Sheet* sheet,int satr,int soton){
 (*sheet).soton = soton;
 //تعداد سطرها و ستون ها دخیره میشه
 
+(*sheet).cells = malloc(satr * sizeof(Cell*));
+if(!(*sheet).cells){
+    printf("Hafezeh kafi nist");
+    return;
+}
+
+for(int i=0; i<satr; i++){
+    (*sheet).cells[i] = malloc(soton * sizeof(Cell));
+    if(!(*sheet).cells[i]){
+    printf("Hafezeh kafi nist");
+    return;
+}
+}
+
+
 //مقداردهی سلول
 for(int i =0; i<satr; i++){
     for(int j=0; j<soton; j++){
@@ -38,7 +54,7 @@ for(int i =0; i<satr; i++){
     (*cell).formula[0] = '\0';  //رشته فرمول خالی
     (*cell).error = Err_NONE;   //وضعیت بدون خطا
 
-    //ساخت آدرس برای سلول
+    //ساخت آدرس برای سلول مثل آ1
     char esm[10]; //یک رشته برای نام ستون
     andisaddadi_be_esm(j,esm);
     snprintf((*cell).address,sizeof((*cell).address),"%s%d",esm, i+1); //ساخت رشته آدرس سلول که شامل اسم ستون و شماره سطر

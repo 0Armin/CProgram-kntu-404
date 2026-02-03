@@ -24,7 +24,7 @@ typedef struct{
 typedef struct{
     int satr;
     int soton;
-    Cell cells[Max_satr][Max_soton];
+    Cell** cells;
     //ماتریس دو بعدی برای سلول
 }Sheet;
 
@@ -60,4 +60,7 @@ const char* errorToString(CellError err);
 //صحت سنجی ورودی ها
 int isvalidnumber(const char*s);
 int sanitize_Formula(const char* formula);
+
+void freeSheet(Sheet* sheet);
+
 #endif
