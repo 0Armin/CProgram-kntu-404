@@ -3,7 +3,7 @@
 #define FORMULA_H
 
 #include "split_input.h"
-#include"sheet.h"
+#include "sheet.h"
 
 // کدهای خطا //
 #define ERR_NONE 20//بدون ارور//
@@ -14,6 +14,7 @@
 #define ERR_PAREN_MISMATCH 25// عدم تطابق پرانتزها (پرانتز باز و بسته برابر نیست)//
 #define ERR_DOMAIN 26// خطای دامنه تابع (مثلاً ریشه عدد منفی یا لگاریتم عدد نامعتبر)//
 #define ERR_SYNTAX 27// خطای نحوی در عبارت ورودی//
+#define ERR_EMPTY_INPUT 28// ورودی خالی در ارجاع
 
 double formula(char *input, Sheet *sheet);
 //ارور هندلینگ در بخش اجرای توابع ریاضی انجام شده و تمام پاسخ به فارسی دارند و ارور نمیده//
@@ -31,6 +32,8 @@ double run_function(const char *name, double arg, int *err);
 - err: خروجی کد خطا (ERR_NONE = بدون خطا)
 
 */
+double cell_ref(Sheet *sheet, char input[], int *err);
+
 double parse_and_calculate(part_list list, void *sheet, int *err);
 
 
