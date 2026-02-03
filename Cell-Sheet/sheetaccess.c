@@ -124,6 +124,8 @@ int setCellFormula(Sheet* sheet, const char* address, const char* formula) {
     */
          strncpy(cell->formula, formula, Max_formula_tol);
     cell->formula[Max_formula_tol - 1] = '\0';
+    cell->type = CELL_FORMULA;
+    cell->error = Err_NONE;
     return 1;
 }
 
@@ -140,6 +142,9 @@ int setCellValue(Sheet* sheet, const char* address, double value) {
     مثلا اگر ادرس آ1 رو بدی بعد ولیو ش رو 10 بدی  این تابع مقدار 10 رو در آ1 ذخیره میکنه
     */
     cell->value = value;
+    cell->type = CELL_NUMBER;
+    cell->formula[0] = '\0';
+    cell->error = Err_NONE;
     return 1;}
     Cell* getCellByIndex(Sheet* sheet, int row, int col) {
     if (!sheet) return NULL;

@@ -56,7 +56,7 @@ for(int i =0; i<satr; i++){
     (*cell).value = 0.0;  //مقدار داخل سلول صفر
     (*cell).formula[0] = '\0';  //رشته فرمول خالی
     (*cell).error = Err_NONE;   //وضعیت بدون خطا
-
+    (*cell).type = CELL_EMPTY;
     //ساخت آدرس متنی برای سلول مثل آ1
     char esm[10]; //یک رشته برای نام ستون
     andisaddadi_be_esm(j,esm); //تبدیل اندیس عددی ستون به اسم

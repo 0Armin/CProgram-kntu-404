@@ -74,6 +74,7 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
                 (*cell).value = 0.0;
                 (*cell).formula[0] = '\0';
                 (*cell).error = Err_NONE;
+                (*cell).type = CELL_EMPTY;
                 char esm[10];
                 andisaddadi_be_esm(j, esm);
                 snprintf((*cell).address, sizeof((*cell).address), "%s%d", esm, i+1);
@@ -103,6 +104,7 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
                 (*cell).value = 0.0;
                 (*cell).formula[0] = '\0';
                 (*cell).error = Err_NONE;
+                (*cell).type = CELL_EMPTY;
                 char esm[10];
                 andisaddadi_be_esm(j, esm);
                 snprintf((*cell).address, sizeof((*cell).address), "%s%d", esm, i+1);

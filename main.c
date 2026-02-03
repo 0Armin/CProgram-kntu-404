@@ -1,6 +1,7 @@
 #include "sheet.h"
 #include "formula.h"
 #include "split_input.h"
+#include "File.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -147,6 +148,46 @@ int main() {
         }
 
         else if (choice == 7) {
+
+            if (!init) {
+                printf("Meghdar dehi avaliye anjam shavad\n");
+                continue;
+            }
+
+            char filename[256];
+
+            printf("File Name: ");
+            scanf("%s", filename);
+
+            FileError err = saveSheetToFile(&sheet, filename);
+
+            if (err == FILE_OK)
+                printf("File zakhire shod\n");
+            else
+                printf("Khata dar zakhire file\n");
+        }
+
+        else if (choice == 8) {
+
+            if (!init) {
+                printf("Meghdar dehi avaliye anjam shavad\n");
+                continue;
+            }
+
+            char filename[256];
+
+            printf("File Name: ");
+            scanf("%s", filename);
+
+            FileError err = loadSheetFromFile(&sheet, filename);
+
+            if (err == FILE_OK)
+                printf("File load shod\n");
+            else
+                printf("Khata dar load file\n");
+        }
+
+        else if (choice == 9) {
             printf("Khoroj az barname\n");
             break;
         }
@@ -167,6 +208,8 @@ void menu() {
     printf("4) Print kamel jadval \n");
     printf("5) Print mahdod jadval\n");
     printf("6) Taghir andaze jadval\n");
-    printf("7) Khoroj\n");
+    printf("7) Zakhire file\n");
+    printf("8) Load file\n");
+    printf("9) Khoroj\n");
     printf("Gozine vared konid: ");
 }

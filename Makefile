@@ -16,6 +16,8 @@ SRC_DIRS := . Cell-Sheet File Formula
 SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 OBJS := $(SRCS:.c=.o)
 DEPS := $(OBJS:.o=.d)
+OBJ_WIN := $(subst /,\,$(OBJS))
+DEP_WIN := $(subst /,\,$(DEPS))
 
 # =========================
 # Target executable
@@ -41,7 +43,6 @@ $(TARGET): $(OBJS)
 # Clean build
 clean:
 	@echo Cleaning object and dependency files...
-	-del /f $(OBJS) 2>nul
-	-del /f $(DEPS) 2>nul
-	-if exist $(TARGET).exe del /f $(TARGET).exe
-	-if exist $(TARGET) del /f $(TARGET)
+	@for %%f in ($(OBJ_WIN) $(DEP_WIN)) do if exist "%%f" del /f /q "%%f"
+	@if exist $(TARGET).exe del /f $(TARGET).exe
+	@if exist $(TARGET) del /f $(TARGET)
