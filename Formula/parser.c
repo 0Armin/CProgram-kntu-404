@@ -5,14 +5,14 @@
    1- factor عدد و پرانتز و تابع ریاضی و سلول
    2- term ضرب و تقسیم
    3- expression جمع و تفریق
-
+   4- power توان
 همه این قسمت با تابع بازگشتی انجام می شود  
    */
 
 #include "formula.h"
 #include <string.h>
 #include <stdio.h>
-
+#include "split_input.h"
 /* موقیت ایندکس توکن است مثلا 3+5*2pos
 این میشه
 index   0     1     2     3     4
@@ -119,6 +119,29 @@ doubleچون تابع باید  برگرداند
     // هر چیز دیگر که بود برابر با خطای نحوی//
     if (err) *err = ERR_SYNTAX;
     return 0;
+}
+
+// تابع برای پردازش عملگر ^ (توان) 
+static double parse_power(part_list list, void *sheet, int *err)
+{
+    // ابتدا عامل پایه (عدد، پرانتز، تابع و غیره)
+    double left = parse_factor(list, sheet, err); 
+    if (*err != ERR_NONE) return 0;
+
+    // بررسی وجود عملگر ^ 
+    while (pos_token < list.current) {
+        part p = list.items[pos_token];
+        if (p.noe == operator && strcmp(p.text_name, "^") == 0) {  // وقتی ^ پیدا شد
+            pos_token++;  // عبور از ^ (رد می‌شود)
+            double right = parse_factor(list, sheet, err);  // عامل سمت راست
+            if (*err != ERR_NONE) return 0;
+            left = pow(left, right);  // محاسبه توان
+        } else {
+            break;  // اگر ^ نیست، باید خارج شود
+        }
+    }
+
+    return left;
 }
 
 // ضرب و تقسیم //
