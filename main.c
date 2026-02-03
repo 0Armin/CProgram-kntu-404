@@ -19,9 +19,9 @@ int main() {
 
         if (choice == 1){
             int satr, soton;
-            printf("Satr ");
+            printf("Satr: ");
             scanf("%d", &satr);
-            printf("Soton");
+            printf("Soton: ");
             scanf("%d", &soton);
 
             initSheet(&sheet, satr, soton);
@@ -42,7 +42,7 @@ int main() {
             int ch;
             double value;
 
-            printf("Address :");
+            printf("Address: ");
             scanf("%s", address);
 
             printf("Vorodi: ");
@@ -61,7 +61,7 @@ int main() {
             if (setCellValue(&sheet, address, value))
                 printf("Meghdar tanzim shod\n");
             else
-                printf("Khataei : address namotabar\n");
+                printf("Khataei: address namotabar\n");
         }
 
         else if (choice == 3) {
@@ -97,7 +97,7 @@ int main() {
             if (setCellFormula(&sheet, address, formula))
                 printf("Formula tanzim shod\n");
             else
-                printf("Khataei : address namotabar\n");
+                printf("Khataei: address namotabar\n");
         }
 
         else if (choice == 4) {
@@ -136,7 +136,7 @@ int main() {
             int satr_jadid, soton_jadid;
             printf("Satr jadid: ");
             scanf("%d", &satr_jadid);
-            printf("Soton jadid :")
+            printf("Soton jadid: ");
             scanf("%d", &soton_jadid);
 
             taghir_size_Sheet(&sheet, satr_jadid, soton_jadid);

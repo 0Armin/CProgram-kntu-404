@@ -29,6 +29,14 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
     int soton_ghadimi = (*sheet).soton;
 
     //تغییر تعداد سطرها
+    
+    // اگر تعداد سطرها کم شده سطرهای اضافه آزاد شوند
+    if(satr_jadid < satr_ghadimi){
+        for(int i = satr_jadid; i < satr_ghadimi; i++){
+            free((*sheet).cells[i]);
+        }
+    }
+
     Cell** sotoonha_jadid = realloc((*sheet).cells , satr_jadid * sizeof(Cell*));
        if(!sotoonha_jadid){
         return;
@@ -67,12 +75,6 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
                 andisaddadi_be_esm(j, esm);
                 snprintf((*cell).address, sizeof((*cell).address), "%s%d", esm, i+1);
             }
-        }
-    }
-    // اگر تعداد سطرها کم شده سطرهای اضافه آزاد شوند
-    if(satr_jadid < satr_ghadimi){
-        for(int i = satr_jadid; i < satr_ghadimi; i++){
-            free((*sheet).cells[i]);
         }
     }
 //با ترکیب کلی اینا جدول بزرگتر میشه

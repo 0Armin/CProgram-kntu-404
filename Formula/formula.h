@@ -32,7 +32,7 @@ double run_function(const char *name, double arg, int *err);
 - err: خروجی کد خطا (ERR_NONE = بدون خطا)
 
 */
-double cell_ref(Sheet *sheet, char input[], int *err);
+double cell_refrence(Sheet *sheet, char input[], int *err);
 
 double parse_and_calculate(part_list list, void *sheet, int *err);
 

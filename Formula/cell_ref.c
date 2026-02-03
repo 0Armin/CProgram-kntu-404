@@ -1,6 +1,6 @@
 #include "formula.h"
 
-double cell_ref(Sheet *sheet, char input[], int *err){
+double cell_refrence(Sheet *sheet, char input[], int *err){
     if (!sheet || !input)
     {
         *err = ERR_EMPTY_INPUT;
