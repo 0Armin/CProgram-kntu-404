@@ -1,8 +1,8 @@
 #ifndef SHEET_H
 #define SHEET_H
 #include <stddef.h>
-#define Max_satr 1000
-#define Max_soton 1000
+#define Max_satr 10
+#define Max_soton 10
 #define Max_formula_tol 256
 
 typedef enum{
@@ -24,7 +24,7 @@ typedef struct{
 typedef struct{
     int satr;
     int soton;
-    Cell cells[Max_satr][Max_soton];
+    Cell** cells;
     //ماتریس دو بعدی برای سلول
 }Sheet;
 
@@ -60,4 +60,7 @@ const char* errorToString(CellError err);
 //صحت سنجی ورودی ها
 int isvalidnumber(const char*s);
 int sanitize_Formula(const char* formula);
+
+void freeSheet(Sheet* sheet);
+
 #endif

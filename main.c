@@ -1,109 +1,170 @@
 #include "sheet.h"
+#include "formula.h"
+#include "split_input.h"
 #include <stdio.h>
+#include <string.h>
+
+void menu();
+
 int main() {
+
     Sheet sheet;
     int init = 0;
+
     while (1) {
+
         menu();
         int choice;
         scanf("%d", &choice);
-        if (choice == 1) {
+
+        if (choice == 1){
             int satr, soton;
-            printf("تعداد سطر: ");
+            printf("Satr: ");
             scanf("%d", &satr);
-            printf("تعداد ستون: ");
+            printf("Soton: ");
             scanf("%d", &soton);
+
             initSheet(&sheet, satr, soton);
-            init = 1;  //نقش یک پرچم رو بازی میکنه که متوجه بشیم آیا جدول مقدار دهی انجام شده یا خیر که عدد 1 یعنی حدول آماده استفاده کردن شده است
-            printf("جدول مقداردهی شد.\n");
+            init = 1;
+
+            printf("Jadval meghdardehi shod\n");
         }
+
         else if (choice == 2) {
+
             if (!init) {
-                //بررسی اینکه جدول خالی نباشه و اول جدول ساخته شود
-                printf("اول جدول را مقداردهی اولیه کنید.\n");
+                printf("Meghdar dehi avaliye anjam shavad\n");
                 continue;
             }
+
             char address[10];
+            char input[256];
+            int ch;
             double value;
-            printf("آدرس سلول (مثلاً A1): ");
+
+            printf("Address: ");
             scanf("%s", address);
-            printf("مقدار عددی: ");
-            scanf("%lf", &value);
-            if (setCellValue(&sheet, address, value))
-                printf("مقدار تنظیم شد.\n");
-            else
-                printf("خطا: آدرس نامعتبر\n");
-        }
-        else if (choice == 3) {
-            if (!init) {
-                printf("اول جدول را مقداردهی اولیه کنید\n");
+
+            printf("Vorodi: ");
+
+            while ((ch = getchar()) != '\n' && ch != EOF);
+
+            if (fgets(input, sizeof(input), stdin) == NULL) {
+                printf("Khataei dar vorodi\n");
                 continue;
             }
+
+            input[strcspn(input, "\n")] = '\0';
+
+            value = formula(input, &sheet);
+
+            if (setCellValue(&sheet, address, value))
+                printf("Meghdar tanzim shod\n");
+            else
+                printf("Khataei: address namotabar\n");
+        }
+
+        else if (choice == 3) {
+
+            if (!init) {
+                printf("Meghdar dehi avaliye anjam shavad\n");
+                continue;
+            }
+
             char address[10];
             char formula[Max_formula_tol];
-            printf("آدرس سلول: ");
+            int ch;
+
+            printf("Address: ");
             scanf("%s", address);
-            printf("فرمول: ");
-            scanf("%s", formula);
+
+            printf("Formula: ");
+
+            while ((ch = getchar()) != '\n' && ch != EOF);
+
+            if (fgets(formula, sizeof(formula), stdin) == NULL) {
+                printf("Khataei dar vorodi\n");
+                continue;
+            }
+
+            formula[strcspn(formula, "\n")] = '\0';
+
             if (!sanitize_Formula(formula)) {
-                printf("فرمول نامعتبر است.\n");
+                printf("Formula namotabr\n");
                 continue;
             }
+
             if (setCellFormula(&sheet, address, formula))
-                printf("فرمول تنظیم شد.\n");
+                printf("Formula tanzim shod\n");
             else
-                printf("خطا: آدرس نامعتبر.\n");
+                printf("Khataei: address namotabar\n");
         }
+
         else if (choice == 4) {
+
             if (!init) {
-                printf("اول جدول را مقداردهی اولیه کنید.\n");
+                printf("Meghdar dehi avaliye anjam shavad\n");
                 continue;
             }
+
             printSheet(&sheet);
         }
+
         else if (choice == 5) {
+
             if (!init) {
-                printf("اول جدول را مقداردهی اولیه کنید.\n");
+                printf("Meghdar dehi avaliye anjam shavad\n");
                 continue;
             }
+
             int maxsatr, maxsoton;
-            printf("حداکثر سطر: ");
+            printf("Bishtarin satr: ");
             scanf("%d", &maxsatr);
-            printf("حداکثر ستون: ");
+            printf("Bishtarin soton: ");
             scanf("%d", &maxsoton);
-           printSheet_mahdod(&sheet, maxsatr, maxsoton);
+
+            printSheet_mahdod(&sheet, maxsatr, maxsoton);
         }
+
         else if (choice == 6) {
+
             if (!init) {
-                printf("اول جدول را مقداردهی اولیه کنید.\n");
+                printf("Meghdar dehi avaliye anjam shavad\n");
                 continue;
             }
+
             int satr_jadid, soton_jadid;
-            printf("سطر جدید: ");
+            printf("Satr jadid: ");
             scanf("%d", &satr_jadid);
-            printf("ستون جدید: ");
+            printf("Soton jadid: ");
             scanf("%d", &soton_jadid);
+
             taghir_size_Sheet(&sheet, satr_jadid, soton_jadid);
-            printf("اندازه جدول تغییر کرد.\n");
+
+            printf("Andaze jadval taghir kard\n");
         }
+
         else if (choice == 7) {
-            printf("خروج از برنامه...\n");
+            printf("Khoroj az barname\n");
             break;
         }
         else {
-            printf("گزینه نامعتبر.\n");
+            printf("Gozine namotabar\n");
         }
     }
+    if (init)
+        freeSheet(&sheet);
+
     return 0;
 }
 void menu() {
-    printf("\n===== منوی اصلی =====\n");
-    printf("1) مقداردهی اولیه جدول\n");
-    printf("2) تنظیم مقدار یک سلول\n");
-    printf("3) تنظیم فرمول یک سلول\n");
-    printf("4) چاپ کامل جدول\n");
-    printf("5) چاپ محدود جدول\n");
-    printf("6) تغییر اندازه جدول\n");
-    printf("7) خروج\n");
-    printf("گزینه را وارد کنید: ");
+    printf("\n===== main menu =====\n");
+    printf("1) Meghdardehi avaliye jadval\n");
+    printf("2) Tanzim meghdar yek selol\n");
+    printf("3) Tanzim formula yek selol\n");
+    printf("4) Print kamel jadval \n");
+    printf("5) Print mahdod jadval\n");
+    printf("6) Taghir andaze jadval\n");
+    printf("7) Khoroj\n");
+    printf("Gozine vared konid: ");
 }

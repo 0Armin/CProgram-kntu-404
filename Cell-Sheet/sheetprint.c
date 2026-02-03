@@ -10,7 +10,8 @@ void printSheet(const Sheet* sheet){
     for(int i=0; i<(*sheet).satr; i++){
         for(int j=0; j<(*sheet).soton; j++){
             const Cell* cell = &(*sheet).cells[i][j];
-            printf("%s: %.4f[%s] (%s)\t", (*cell).address, (*cell).value, (*cell).formula,errorToString((*cell).error));
+            //printf("%s: %.4f[%s] (%s)\t", (*cell).address, (*cell).value, (*cell).formula,errorToString((*cell).error));
+            printf("%s: %.4f \t", (*cell).address, (*cell).value);
         }
         printf("\n");
     }
