@@ -42,19 +42,20 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
                 Cell* cell = &(*sheet).cells[i][j];
                 if((*cell).value != 0.0 || (*cell).formula[0] != '\0'){
                     printf("Hoshdar: selol %s daraye dade bode va hazf shod\n", (*cell).address);
-                }
-            }
-        free((*sheet).cells[i]); //آزاد کردن حافظه سطر
+        }
+    }
+    free((*sheet).cells[i]); //آزاد کردن حافظه سطر
   }
 }
 
 
 //تغییر اندازه آرایه سطرها
-    Cell** sotoonha_jadid = realloc((*sheet).cells , satr_jadid * sizeof(Cell*));
-       if(!sotoonha_jadid){
+//آرایه اشاره گرهای سطرها با اندازه جدید تغییر داده میشه
+    Cell** satrha_jadid = realloc((*sheet).cells , satr_jadid * sizeof(Cell*));
+       if(!satrha_jadid){
         return; //اگر حافظه کافی نبود
     }
-    (*sheet).cells = sotoonha_jadid;
+    (*sheet).cells = satrha_jadid;
 
     //حرکت روی سطرهای جدید و قدیمی
     for(int i = 0; i < satr_jadid; i++){
@@ -94,7 +95,7 @@ void taghir_size_Sheet(Sheet* sheet,int satr_jadid,int soton_jadid){
                 return;
             }
             (*sheet).cells[i] = sotonha_jadid;
-            
+
             // مقداردهی ستون‌های جدید
             for(int j = soton_ghadimi; j < soton_jadid; j++){
                 Cell* cell = &(*sheet).cells[i][j];
