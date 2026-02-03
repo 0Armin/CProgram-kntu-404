@@ -1,4 +1,4 @@
-#include "sheet.h"
+﻿#include "sheet.h"
 #include <ctype.h>
 #include <string.h>
 int isvalidnumber(const char* s) {
@@ -39,7 +39,7 @@ int sanitize_Formula(const char* formula) {
         unsigned char c = (unsigned char)formula[i];
         int allowed =
             isalpha(c) || isdigit(c) ||
-            c == '+' || c == '-' || c == '*' || c == '/' ||
+            c == '+' || c == '-' || c == '*' || c == '/' || c == '^' ||
             c == '(' || c == ')' || c == '.' || c == '_' ||
             c == ',' || c == ' ';
 //انواع کاراکتر های مجاز رو بالا نمایش دادیم

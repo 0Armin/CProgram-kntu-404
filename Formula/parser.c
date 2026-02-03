@@ -1,4 +1,4 @@
-
+﻿
 /* parser.c
    پارسر  بر اساس خروجی split-input (part_list).
    قواعد:
@@ -48,6 +48,14 @@ doubleچون تابع باید  برگرداند
 
 
     part p = list.items[pos_token];
+    // Handle unary +/-
+    if (p.noe == operator && (strcmp(p.text_name, "+") == 0 || strcmp(p.text_name, "-") == 0)) {
+        char op = p.text_name[0];
+        pos_token++;
+        double v = parse_factor(list, sheet, err);
+        if (*err != ERR_NONE) return 0;
+        return (op == '-') ? -v : v;
+    }
     /*
     list.items = آرایه توکن‌ها
     pos_token =  شماره توکن فعلی که به صورت ایندکس ارایه است
@@ -139,7 +147,7 @@ static double parse_power(part_list list, void *sheet, int *err)
         part p = list.items[pos_token];
         if (p.noe == operator && strcmp(p.text_name, "^") == 0) {  // وقتی ^ پیدا شد
             pos_token++;  // عبور از ^ (رد می‌شود)
-            double right = parse_factor(list, sheet, err);  // عامل سمت راست
+            double right = parse_power(list, sheet, err);  // عامل سمت راست
             if (*err != ERR_NONE) return 0;
             left = pow(left, right);  // محاسبه توان
         } else {

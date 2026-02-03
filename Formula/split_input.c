@@ -50,7 +50,6 @@ part_list split(char *text){
         if (isdigit(text[i]) || text[i] == '.')
         {
             char *end;// یک پوینتر به انتهای عدد
-            char *start = &text[i];
             double value = strtod(&text[i],&end);
             //تابع استفاده شده در قسمت بالا یک تابع کمکی هست که استرینگ ورودی رو چک میکنه
             //و کل عدد رو تبدیل به خروجی از نوع دابل میکنه حتی با ممیز
