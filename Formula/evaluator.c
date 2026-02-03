@@ -1,4 +1,4 @@
-
+﻿
 /* evaluator.c
    پیاده‌سازی توابع ریاضی  و گزارش خطای دامنه یا ناشناخته.
    
@@ -41,7 +41,13 @@ double run_function(const char *name, double arg, int *err)
 
     if (strcmp(name,"sin") == 0) return sin(arg);
     if (strcmp(name, "cos") == 0) return cos(arg);
-    if (strcmp(name,"tan") == 0) return tan(arg);
+    if (strcmp(name,"tan") == 0) {
+        if (fmod(arg, M_PI_2) == 0 && fmod(arg, M_PI) != 0) {
+            if (err) *err = ERR_DOMAIN;
+            return 0;
+        }
+        return tan(arg);
+    }
     if (strcmp(name, "sinh") == 0) return sinh(arg);
     if (strcmp(name, "cosh") == 0) return cosh(arg);
 

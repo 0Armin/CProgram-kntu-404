@@ -12,6 +12,7 @@
 #include "formula.h"
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
 #include "split_input.h"
 /* موقیت ایندکس توکن است مثلا 3+5*2pos
 این میشه
@@ -110,10 +111,15 @@ doubleچون تابع باید  برگرداند
 
     //اگر ارجاع سلولی بود //
     if (p.noe == cell_ref) {
-
         pos_token++;
-        if (err) *err = ERR_EMPTY_CELL;
-        return 0;
+        int cerr = ERR_NONE;
+        double v = cell_refrence((Sheet*)sheet, p.text_name,&cerr);
+        if (cerr != ERR_NONE)
+        {
+            if (err) *err = cerr;
+            return 0;
+        }
+        return v;
     }
 
     // هر چیز دیگر که بود برابر با خطای نحوی//

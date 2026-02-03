@@ -6,8 +6,6 @@
 #define Max_formula_tol 256
 #define MAX_FORMULA 256
 
-extern int sheet_type;
-
 typedef enum{
     //نوع خطاها
     Err_NONE,Err_taghsim_sefr,Err_tabe_nashenakhte_formul,Err_erjaa_namotabar_beselol,Err_parantez,Err_damane_tabe,Err_file,Err_ghaleb_dade

@@ -1,4 +1,5 @@
 #include "File.h"
+#include <string.h>
 
 /* Trim leading and trailing whitespace */
 char* trimSpace(char *s){
